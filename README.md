@@ -22,3 +22,9 @@
 - [Postman](https://interstellar-firefly-24698.postman.co/home)
 
 ---
+
+## Author Info
+
+- 💻 [LinkedIn](https://www.linkedin.com/in/hüseyin-doğukan-yılmaz-75a1531ab/)
+
+- 🎫 [Email](mailto:dogu_codem@hotmail.com?subject=[GitHub]%20Source%20Han%20Sans)
