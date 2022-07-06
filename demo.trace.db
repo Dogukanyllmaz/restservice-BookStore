@@ -1,0 +1,2 @@
+2022-07-06 05:55:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "TIMESTAMP to BINARY VARYING" [22018-214]
