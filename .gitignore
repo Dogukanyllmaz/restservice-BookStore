@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### H2 DB ###
+demo.mv.db
+bookStore.iml
+
