@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book,Long> {
 
-       // Book getByBookName(String bookName);
-       // Book getByBookNameAndCategory_CategoryId(String bookName, Long categoryId);
+
 
 }
