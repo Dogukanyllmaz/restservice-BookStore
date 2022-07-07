@@ -1,34 +1,33 @@
 package com.example.bookstore.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
-public class Book {
+@Table(name = "books")
+public class Book  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "book_id")
     private Long id;
+    @Column(name = "book_name")
     private String name;
-    private String writer;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date madeYear;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne()
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
 
     protected Book () {
 
     }
 
-    public Book(String name, String writer, Date madeYear) {
+    public Book(Long id,String name,Category category) {
+        this.id = id;
         this.name = name;
-        this.writer = writer;
-        this.madeYear = madeYear;
+        this.category =category;
     }
 
     public Long getId() {
@@ -39,13 +38,9 @@ public class Book {
         return name;
     }
 
-    public String getWriter() {
-        return writer;
-    }
 
-    public Date getMadeYear() {
-        return madeYear;
+    public Category getCategory() {
+        return category;
     }
-
 
 }
