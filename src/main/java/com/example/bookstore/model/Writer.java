@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "writers")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","books"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Writer {
 
     @Id
@@ -19,7 +19,8 @@ public class Writer {
     private Long id;
     @Column(name = "writer_name")
     private String name;
-    @OneToMany(mappedBy = "writer")
+    @ManyToMany()
+    @JoinColumn(name = "writer_id")
     private List<Book> books;
 
     protected Writer() {
