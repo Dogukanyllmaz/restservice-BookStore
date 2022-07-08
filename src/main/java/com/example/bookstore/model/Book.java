@@ -3,6 +3,10 @@ package com.example.bookstore.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 
@@ -11,23 +15,28 @@ import javax.persistence.*;
 public class Book  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long id;
     @Column(name = "book_name")
     private String name;
     @ManyToOne()
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne()
+    @JoinColumn(name = "writer_id")
+    private Writer writer;
+
 
     protected Book () {
 
     }
 
-    public Book(Long id,String name,Category category) {
-        this.id = id;
+    public Book(String name,Category category,Writer writer) {
         this.name = name;
-        this.category =category;
+        this.category = category;
+        this.writer = writer;
     }
 
     public Long getId() {
@@ -43,4 +52,7 @@ public class Book  {
         return category;
     }
 
+    public Writer getWriter() {
+        return writer;
+    }
 }

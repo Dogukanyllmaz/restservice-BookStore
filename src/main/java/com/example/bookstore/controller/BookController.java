@@ -14,10 +14,10 @@ import java.util.Optional;
 @RequestMapping("/books/")
 public class BookController {
 
+    @Autowired
     private BookRepository bookRepository;
 
 
-    @Autowired
     public BookController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }

@@ -14,9 +14,10 @@ import java.util.Optional;
 @RequestMapping("/categories/")
 public class CategoryController {
 
+    @Autowired
     private CategoryRepository categoryRepository;
 
-    @Autowired
+
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
