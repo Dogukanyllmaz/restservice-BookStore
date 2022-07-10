@@ -26,13 +26,19 @@ public class Book  {
     joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_writer",
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "writer_id"))
+    private List<Writer> writers;
 
     protected Book () {
     }
 
-    public Book(String name,List<Category> categories ) {
+    public Book(String name,List<Category> categories,List<Writer> writers ) {
         this.name = name;
         this.categories = categories;
+        this.writers = writers;
     }
 
     public Long getId() {
@@ -47,4 +53,7 @@ public class Book  {
         return categories;
     }
 
+    public List<Writer> getWriters() {
+        return writers;
+    }
 }
