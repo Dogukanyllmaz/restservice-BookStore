@@ -3,12 +3,10 @@ package com.example.bookstore.model;
 
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
+
 
 
 @Entity
@@ -16,28 +14,25 @@ import java.util.List;
 public class Book  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "book_id")
     private Long id;
+
     @Column(name = "book_name")
     private String name;
-    @ManyToOne()
-    @JoinColumn(name = "category_id")
-    private Category category;
 
-    @ManyToMany()
-    @JoinColumn(name = "book_id")
-    private List<Writer> writers;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_category" ,
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 
     protected Book () {
-
     }
 
-    public Book(String name,Category category,List<Writer> writer) {
+    public Book(String name,List<Category> categories ) {
         this.name = name;
-        this.category = category;
-        this.writers = writer;
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -48,12 +43,8 @@ public class Book  {
         return name;
     }
 
-
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public List<Writer> getWriter() {
-        return writers;
-    }
 }
