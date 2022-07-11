@@ -19,7 +19,6 @@ public class Category {
     @Column(name = "category_name")
     private String name;
     @ManyToMany(mappedBy = "categories")
-    @JsonIgnoreProperties("categories")
     private List<Book> books;
 
     protected Category() {

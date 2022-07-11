@@ -1,5 +1,6 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Writer;
 import com.example.bookstore.repository.WriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ import java.util.List;
 @RequestMapping("/writers/")
 public class WriterController {
 
+    @Autowired
     private WriterRepository writerRepository;
 
-    @Autowired
     public WriterController(WriterRepository writerRepository) {
         this.writerRepository = writerRepository;
     }
@@ -30,6 +31,7 @@ public class WriterController {
         writerRepository.save(writer);
         return ResponseEntity.status(HttpStatus.CREATED).body(writer);
     }
+
 
 
 }

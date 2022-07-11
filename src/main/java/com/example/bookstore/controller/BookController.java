@@ -51,7 +51,15 @@ public class BookController {
 
     }
 
-
+    @PutMapping("{id}")
+    public ResponseEntity<Book> updateBook(@RequestBody Book book,@PathVariable Long id) {
+        try {
+            bookRepository.save(book);
+            return ResponseEntity.status(HttpStatus.OK).body(book);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(book);
+        }
+    }
 
 
 }
