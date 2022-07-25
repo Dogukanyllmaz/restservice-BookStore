@@ -8,21 +8,18 @@ import java.util.List;
 public class Writer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "writer_id")
     private Long id;
     @Column(name = "writer_name")
     private String name;
-    @ManyToMany(mappedBy = "writers")
-    private List<Book> books;
 
     protected Writer() {
 
     }
 
-    public Writer(String name, List<Book> books) {
+    public Writer(String name) {
         this.name = name;
-        this.books = books;
     }
 
     public Long getId() {
@@ -33,7 +30,4 @@ public class Writer {
         return name;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 }

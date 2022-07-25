@@ -1,12 +1,8 @@
 package com.example.bookstore.model;
 
-
-
-
-
 import javax.persistence.*;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -14,31 +10,29 @@ import java.util.List;
 public class Book  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long id;
 
     @Column(name = "book_name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "book_category" ,
     joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categories;
-    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Category> categories = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "book_writer",
     joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "writer_id"))
-    private List<Writer> writers;
+    private Set<Writer> writers = new HashSet<>();
 
     protected Book () {
     }
 
-    public Book(String name,List<Category> categories,List<Writer> writers ) {
+    public Book(String name) {
         this.name = name;
-        this.categories = categories;
-        this.writers = writers;
     }
 
     public Long getId() {
@@ -49,11 +43,19 @@ public class Book  {
         return name;
     }
 
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public List<Writer> getWriters() {
+    public Set<Writer> getWriters() {
         return writers;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void setWriters(Set<Writer> writers) {
+        this.writers = writers;
     }
 }

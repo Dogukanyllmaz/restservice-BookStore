@@ -9,25 +9,21 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categories")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
     @Column(name = "category_name")
     private String name;
-    @ManyToMany(mappedBy = "categories")
-    private List<Book> books;
 
     protected Category() {
 
     }
 
-    public Category( String name, List<Book> books) {
+    public Category( String name) {
         this.name = name;
-        this.books = books;
     }
 
     public Long getId() {
@@ -38,7 +34,4 @@ public class Category {
         return name;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 }
