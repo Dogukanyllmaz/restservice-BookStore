@@ -8,16 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/categories/")
 public class CategoryController {
 
-    @Autowired
+
     private CategoryRepository categoryRepository;
 
-
+    @Autowired
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
@@ -27,11 +26,6 @@ public class CategoryController {
         return (List<Category>) categoryRepository.findAll();
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable Long id) {
-        Optional<Category> category = categoryRepository.findById(id);
-        return ResponseEntity.status(HttpStatus.FOUND).body(category);
-    }
 
     @PostMapping("")
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
@@ -39,15 +33,7 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Category> removeCategoryById(@PathVariable Long id) {
-        try {
-            categoryRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
+
 
 
 }
